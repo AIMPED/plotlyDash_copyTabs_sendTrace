@@ -13,7 +13,7 @@ layout = dbc.Tabs(
         dbc.Tab(
             label="Main",
             tab_id="tab-0",
-            children=blocks.create_content(num=0)
+            children=blocks.create_tab_content(num=0)
         )
     ],
     active_tab="tab-0",
@@ -81,11 +81,11 @@ def copy(tabs):
     State('sidebar_left', 'is_open'),
     prevent_initial_call=True
 )
-def open_sidebar(clickData, figure, is_open):
-    if clickData is None:
+def open_sidebar(clickdata, figure, is_open):
+    if clickdata is None:
         raise PreventUpdate
 
-    clicked_series = clickData['points'][0]['curveNumber']
+    clicked_series = clickdata['points'][0]['curveNumber']
     trace = figure['data'][clicked_series]
     return not is_open, trace
 
@@ -100,7 +100,7 @@ def open_sidebar(clickData, figure, is_open):
     State({'type': 'central_store', 'index': 2}, 'data'),
     State('sidebar_left', 'is_open'),
 )
-def copy_trace(click, selected_tab, figures, trace_to_copy, is_open):
+def copy_trace(_, selected_tab, figures, trace_to_copy, is_open):
     if selected_tab is None:
         raise PreventUpdate
 
@@ -110,7 +110,3 @@ def copy_trace(click, selected_tab, figures, trace_to_copy, is_open):
     figures[selected_tab] = patched
 
     return figures, not is_open
-
-
-
-
