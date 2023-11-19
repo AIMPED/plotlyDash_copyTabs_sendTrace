@@ -66,12 +66,12 @@ def create_tabs(num):
     return dbc.Tab(
         label=f"Tab-{num}",
         tab_id=f"tab-{num}",
-        children=create_content(num)
+        children=create_tab_content(num)
     )
 
 
 # function for creation of tab content
-def create_content(num):
+def create_tab_content(num):
     return dbc.Stack(
         [
             dbc.Stack(
