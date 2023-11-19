@@ -3,7 +3,6 @@ from dash import dcc, Input, Output, callback
 import dash_bootstrap_components as dbc
 
 import blocks
-from blocks import static_options
 
 
 external_stylesheets = [
@@ -40,7 +39,7 @@ server = app.server
 app.layout = dbc.Container(
     [
         navbar,
-        static_options,
+        blocks.static_options,
         dash.page_container,
         dcc.Store(id={'type': 'central_store', 'index': 0}),
         # ^^ selected dataset
