@@ -1,5 +1,5 @@
 import dash
-from dash import dcc, Input, Output, callback
+from dash import dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
 import blocks
 
@@ -28,8 +28,7 @@ navbar = dbc.Navbar(
         if page['name'] != 'Not found 404'
     ],
     color='primary',
-    className='mb-0',
-    # ^^ no margin on bottom
+    className='mb-1',
     style={'height': '50px'}
 )
 

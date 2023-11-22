@@ -4,21 +4,23 @@ import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import blocks
 
-
 # register page in the registry
 register_page(__name__, path="/dissolution")
 
 # page layout
-layout = dbc.Tabs(
-    id='diss_tabs',
-    children=[
-        dbc.Tab(
-            label="Main",
-            tab_id="tab-0",
-            children=blocks.create_tab_content(num=0)
-        )
-    ],
-    active_tab="tab-0",
+layout = dbc.Container(
+    dbc.Tabs(
+        id='diss_tabs',
+        children=[
+            dbc.Tab(
+                label="Main",
+                tab_id="tab-0",
+                children=blocks.create_tab_content(num=0)
+            )
+        ],
+        active_tab="tab-0",
+    ),
+    className='pt-3'
 )
 
 
@@ -46,19 +48,18 @@ def select_options(column_names, dropdowns):
     prevent_initial_call=True
 )
 def plot_chart(x, y, selected_data, _):
-    
     # create dummy data
     df = blocks.create_data(selected_data)
-    
+
     return go.Figure(
         data=[
             go.Scatter(
-                    x=df[x], 
-                    y=df[i]
-                ) 
-                for i in y
-            ]
-        )
+                x=df[x],
+                y=df[i]
+            )
+            for i in y
+        ]
+    )
 
 
 # copy tabs, add options to drop down
@@ -70,13 +71,13 @@ def plot_chart(x, y, selected_data, _):
 def copy(clicks):
     if clicks is None:
         raise PreventUpdate
-    
+
     # create Patch() instance
     patched = Patch()
-    
+
     # add new tab
     patched.append(blocks.create_tabs(clicks))
-    
+
     return patched
 
 
@@ -105,10 +106,10 @@ def open_sidebar(clickdata, figure, is_open):
 
     # which trace has been clicked?
     clicked_series = clickdata['points'][0]['curveNumber']
-    
+
     # extract trace from figure
     trace = figure['data'][clicked_series]
-    
+
     return not is_open, trace
 
 

@@ -7,20 +7,29 @@ import plotly.graph_objects as go
 
 sidebar = dbc.Offcanvas(
     id="sidebar_left",
-    title="Sidebar left",
+    title="Copy trace",
     backdrop=False,
     is_open=False,
-    class_name="rounded-end rounded-2 border border-2",
+    class_name="border border-2",
     style={'width': 300},
     
     # content of the sidebar
     children=dbc.Stack(
         [
-            html.H3('Copy trace'),
-            dcc.Dropdown(id='tab_selector', options=[]),
-            dbc.Button(id='send_trace', children='send trace to tab')
+            dcc.Dropdown(
+                id='tab_selector',
+                options=[],
+                style={'min-height': '50px'},
+                className='pt-1 pb-1',
+                placeholder='Select tab...'
+            ),
+            dbc.Button(
+                id='send_trace',
+                children='Send to tab'
+            )
         ],
-        direction='vertical')
+        direction='vertical'
+    )
 )
 
 
@@ -56,18 +65,28 @@ static_options = dbc.Container(
                         placeholder='Select data...',
                         style={'width': '100%', 'min-height': '50px'}
                     ),
-                    style={'width': '300px'}
+                    style={'width': '300px'},
+                    className='me-1'
                 ),
-                dbc.Button(id='copy_tab_btn', children='copy main tab'),
+                dbc.Button(
+                    id='copy_tab_btn',
+                    children='copy main tab',
+                    className='ms-1'
+                ),
             ],
-            direction='horizontal'
+            direction='horizontal',
+            className='pt-1'
         ),
-        html.H3('This is the static part for all pages')
+        html.H3(
+            children='This is the static part for all pages',
+            className='pt-2'
+        )
     ],
     style={
-        'height': '20vh',
-        'background-color': 'gray'
+        'height': '12vh',
+        # 'background-color': 'gray'
     },
+    className='bg-primary'
 )
 
 
@@ -97,7 +116,8 @@ def create_tab_content(num: int) -> dbc.Stack:
                             style={'width': '100%', 'min-height': '50px'},
                             placeholder='Select x- axis data'
                         ),
-                        style={'width': '30%'}
+                        style={'width': '30%'},
+                        className='pe-1'
                     ),
                     html.Div(
                         dcc.Dropdown(
@@ -107,14 +127,17 @@ def create_tab_content(num: int) -> dbc.Stack:
                             placeholder='Select y- axis data'
 
                         ),
-                        style={'width': '30%'}
+                        style={'width': '30%'},
+                        className='pe-1'
+
                     ),
                     dbc.Button(
                         id={'type': 'plot_btn', 'index': num},
-                        children='plot'
+                        children='plot chart'
                     )
                 ],
-                direction='horizontal'
+                direction='horizontal',
+                className='pb-1'
             ),
             dcc.Graph(
                 id={'type': 'graph', 'index': num},
