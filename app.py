@@ -1,7 +1,6 @@
 import dash
 from dash import dcc, Input, Output, callback
 import dash_bootstrap_components as dbc
-
 import blocks
 
 
@@ -17,6 +16,7 @@ app = dash.Dash(
     external_stylesheets=external_stylesheets,
 )
 
+# create a simple navbar containing dbc.Buttons() for navigation
 navbar = dbc.Navbar(
     id='navbar',
     children=[
@@ -33,21 +33,19 @@ navbar = dbc.Navbar(
     style={'height': '50px'}
 )
 
-# this line is needed if waitress is used as WSGI server
-server = app.server
-
 app.layout = dbc.Container(
     [
         navbar,
         blocks.static_options,
+        blocks.sidebar,
         dash.page_container,
+        
         dcc.Store(id={'type': 'central_store', 'index': 0}),
         # ^^ selected dataset
         dcc.Store(id={'type': 'central_store', 'index': 1}),
         # ^^ column names of selected dataframe
         dcc.Store(id={'type': 'central_store', 'index': 2}),
         # ^^ trace of clicked data
-        blocks.sidebar,
     ],
 )
 
