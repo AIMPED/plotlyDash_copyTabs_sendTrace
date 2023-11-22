@@ -94,7 +94,8 @@ def create_tab_content(num: int) -> dbc.Stack:
                         children=dcc.Dropdown(
                             id={'type': 'xaxis', 'index': num},
                             multi=False,
-                            style={'width': '100%', 'min-height': '50px'}
+                            style={'width': '100%', 'min-height': '50px'},
+                            placeholder='Select x- axis data'
                         ),
                         style={'width': '30%'}
                     ),
@@ -102,7 +103,9 @@ def create_tab_content(num: int) -> dbc.Stack:
                         dcc.Dropdown(
                             id={'type': 'yaxis', 'index': num},
                             multi=True,
-                            style={'width': '100%', 'min-height': '50px'}
+                            style={'width': '100%', 'min-height': '50px'},
+                            placeholder='Select y- axis data'
+
                         ),
                         style={'width': '30%'}
                     ),
