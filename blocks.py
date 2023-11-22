@@ -12,8 +12,11 @@ sidebar = dbc.Offcanvas(
     is_open=False,
     class_name="rounded-end rounded-2 border border-2",
     style={'width': 300},
+    
+    # content of the sidebar
     children=dbc.Stack(
         [
+            html.H3('Copy trace'),
             dcc.Dropdown(id='tab_selector', options=[]),
             dbc.Button(id='send_trace', children='send trace to tab')
         ],
@@ -21,14 +24,21 @@ sidebar = dbc.Offcanvas(
 )
 
 
-# create DataFrame (dummy data for MockUp)
-def create_data(seed):
+def create_data(seed: int) -> pd.DataFrame:
+    """
+    function creates a dummy DataFrame
+    """
+    # make the DataFrame reproducible
     np.random.seed(seed)
+    
     cols = {
         24: list('ABCD'),
         42: list('EFGH')
     }[seed]
-    return pd.DataFrame(np.random.randint(0, 20, size=(9, 4)), columns=cols)
+    return pd.DataFrame(
+        np.random.randint(0, 20, size=(9, 4)), 
+        columns=cols
+        )
 
 
 # static layout for all pages
@@ -52,7 +62,7 @@ static_options = dbc.Container(
             ],
             direction='horizontal'
         ),
-        html.H3('This is your static part for all pages')
+        html.H3('This is the static part for all pages')
     ],
     style={
         'height': '20vh',
@@ -61,8 +71,10 @@ static_options = dbc.Container(
 )
 
 
-# function for tab creation
-def create_tabs(num):
+def create_tabs(num: int) -> dbc.Tab:
+    """
+    function creates dbc.Tab components
+    """
     return dbc.Tab(
         label=f"Tab-{num}",
         tab_id=f"tab-{num}",
@@ -70,8 +82,10 @@ def create_tabs(num):
     )
 
 
-# function for creation of tab content
-def create_tab_content(num):
+def create_tab_content(num: int) -> dbc.Stack:
+    """
+    function creates the tab content
+    """
     return dbc.Stack(
         [
             dbc.Stack(
