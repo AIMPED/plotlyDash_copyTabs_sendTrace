@@ -1,4 +1,4 @@
-# MockUp
+# CopyTabs & SendTrace
 This repository contains the `python` code for an app using `dash`.
 
 ## Description
